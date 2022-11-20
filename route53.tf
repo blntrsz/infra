@@ -1,5 +1,3 @@
-variable vercel_cname { default = "cname.vercel-dns.com" }
-
 resource "aws_route53_zone" "blntrsz" {
   name = "blntrsz.com"
 }
@@ -12,50 +10,38 @@ resource "aws_route53_record" "default" {
   records = ["76.76.21.123"]
 }
 
-resource "aws_route53_record" "c" {
+module "c_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "c"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
 
-resource "aws_route53_record" "json" {
+module "json_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "json"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
 
-resource "aws_route53_record" "link" {
+module "link_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "link"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
 
-resource "aws_route53_record" "movieligent" {
+module "movieligent_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "movieligent"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
 
-resource "aws_route53_record" "r" {
+module "r_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "r"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
 
-resource "aws_route53_record" "www" {
+module "www_sub_domain" {
+  source = "./modules/blntrsz_cname_record"
   zone_id = aws_route53_zone.blntrsz.zone_id
   name    = "www"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.vercel_cname]
 }
