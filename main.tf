@@ -1,15 +1,4 @@
 terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-    vercel = {
-      source = "vercel/vercel"
-      version = "~> 0.3"
-    }
-  }
-
   backend "s3" {
     bucket         = "blntrsz-terraform-up-and-running-state"
     key            = "global/s3/terraform.tfstate"
@@ -18,7 +7,10 @@ terraform {
   }
 }
 
-# Configure the AWS Provider
-provider "aws" {
-  region = "eu-central-1"
+module "budget" {
+  source = "./services/budget"
+}
+
+module "blntrsz_deployment" {
+  source = "./services/blntrsz_deployment"
 }
